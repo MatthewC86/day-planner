@@ -2,11 +2,13 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-var currentDayEl = document.getElementById(currentDay);
+var currentDay = $('#current-day');
 
-var today = dayjs();
 
-console.log(today);
+
+$('#currentDay').text(dayjs().format('MMM DD, YYYY'));
+
+console.log(currentDay);
 
 
 
