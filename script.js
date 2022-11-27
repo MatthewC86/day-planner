@@ -10,10 +10,17 @@ $(document).ready(function () {
 
     $('#currentDay').text(dayjs().format('MMM DD, YYYY'));
 
+    // now we'll need to track hours to determine past/present/future.
+      function hourUpdate() {
+        var currentHour = dayjs().hour();
+          console.log(currentHour);
+      }
+    
+      $('.time-block').each(function () {
+        var blockHour = parseInt($(this).attr('id').split('-')[1]);
 
-
-
-
+      });
+    } 
 
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
