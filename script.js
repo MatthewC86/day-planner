@@ -10,17 +10,34 @@ $(document).ready(function () {
 
     $('#currentDay').text(dayjs().format('MMM DD, YYYY'));
 
-    // now we'll need to track hours to determine past/present/future.
-      function hourUpdate() {
-        var currentHour = dayjs().hour();
-          console.log(currentHour);
-      }
-    
-      $('.time-block').each(function () {
-        var blockHour = parseInt($(this).attr('id').split('-')[1]);
 
-      });
-    } 
+
+// now we'll need to track hours to determine past/present/future.
+function hourUpdate() {
+  var currentHour = dayjs().hour();
+  console.log(currentHour);
+
+
+$('.time-block').each(function () {
+    var blockHour = parseInt($(this).attr('id').split('-')[1]);
+
+    if (blockHour < currentHour) {
+        // add class
+        $(this).addClass('past');
+      } else if (blockHour === currentHour) {
+        // remove class
+        $(this).removeClass('past');
+        $(this).addClass('present');
+
+      } else {
+        $(this).removeClass('present');
+        $(this).removeClass('past');
+        $(this).addClass('future');
+      }
+    });
+} 
+      hourUpdate();
+
 
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
@@ -29,6 +46,14 @@ $(document).ready(function () {
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
 
+    // save description to local storage
+     $(".saveBtn").on("click", function () {
+      var textInput = $(this).siblings(".description").val()
+      var timeStamp = $(this).parent().attr("id")
+
+      localStorage.setItem(timeStamp, textInput);
+     });
+     
     
      
     
